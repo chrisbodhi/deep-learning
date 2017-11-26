@@ -20,7 +20,7 @@ class NeuralNetwork(object):
 
         self.weights_hidden_to_output = np.random.normal(0.0, self.hidden_nodes**-0.5,
                                                          (self.hidden_nodes, self.output_nodes))
-        self.alpha = learning_rate
+        self.lr = learning_rate
 
         self.activation_function = lambda x: 1 / (1 + np.exp(-x))
 
@@ -114,8 +114,8 @@ class NeuralNetwork(object):
             n_records: number of records
 
         '''
-        self.weights_hidden_to_output += self.alpha * delta_weights_h_o / n_records
-        self.weights_input_to_hidden += self.alpha * delta_weights_i_h / n_records
+        self.weights_hidden_to_output += self.lr * delta_weights_h_o / n_records
+        self.weights_input_to_hidden += self.lr * delta_weights_i_h / n_records
 
     def run(self, features):
         ''' Run a forward pass through the network with input features
@@ -137,9 +137,7 @@ class NeuralNetwork(object):
 #########################################################
 # Set your hyperparameters here
 ##########################################################
-iterations = 10000
-learning_rate = 0.5 # Training loss: 0.054 ... Validation loss: 0.140
-# learning_rate = 0.3 # Training loss: 0.058 ... Validation loss: 0.145
-# learning_rate = 0.7 # Training loss: 0.062 ... Validation loss: 0.139
-hidden_nodes = 29
+iterations = 4000
+learning_rate = 0.5
+hidden_nodes = 28
 output_nodes = 1
